@@ -9,7 +9,7 @@
 - [Linear Search](#linear-search)
 - [Binary Search](#binary-search)
 - Sort Algorithms
-    - Bubble Sort
+    - [Bubble Sort](#bubble-sort)
     - Selection Sort
     - Insertion Sort
     - Merge Sort
@@ -55,3 +55,23 @@
 | Worse-case | Best-case |
 |------------|-------------------|
 | O(log n): Divide that array on `log of n` time when the element does not exist or is at the last division. | Ω(1): The element being searched is at the first half of the array.|
+
+
+### **Bubble Sort**
+
+**The idea of the algorithm is to move higher valued elements generally towards the right and lower values elements generally towards the left.**
+
+**In pseudocode**:
+    - Set swap counter to a non-zero value
+    - Repeat until the swap counter is 0:
+        - reset swap counter to 0
+        - look at each adjacent pair
+            - if two adjacent elements are not in order, swap them and add one to the swap counter
+
+![bubble sort gif](./assets/bubble-sort.gif)
+
+#### Complexity
+
+| Worse-case | Best-case |
+|------------|-------------------|
+| O(n²): To have to move/swap all the `n` elements. | Ω(n): In case of all elements are already sorted, and not having to swap any element.|
