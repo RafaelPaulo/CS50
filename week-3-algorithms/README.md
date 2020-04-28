@@ -10,7 +10,7 @@
 - [Binary Search](#binary-search)
 - Sort Algorithms
     - [Bubble Sort](#bubble-sort)
-    - Selection Sort
+    - [Selection Sort](#selection-sort)
     - Insertion Sort
     - Merge Sort
 
@@ -75,3 +75,22 @@
 | Worse-case | Best-case |
 |------------|-------------------|
 | O(n²): To have to move/swap all the `n` elements. | Ω(n): In case of all elements are already sorted, and not having to swap any element.|
+
+### **Selection Sort**
+
+**The idea of the algorithm is to find the smallest unsorted element and add it to the end of the sorted list.**
+
+**Effectively what this algorithm does is build a sorted list one element at a time.**
+
+**In pseudocode**:
+    - Repeat until no unsorted elements remain:
+        - Search the unsorted part of the data to find the smallest value
+        - Swap the smallest found value with the first element of the unsorted part.
+
+![selection sort gif](./assets/selection-sort.gif)
+
+#### Complexity
+
+| Worse-case | Best-case |
+|------------|-----------|
+| O(n²): To look over all the elements of the array to find the smallest unsorted element, and repeat that `n` times. | Ω(n²): Same as Worse-case scenario :( |
