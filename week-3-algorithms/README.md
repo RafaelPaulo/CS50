@@ -11,7 +11,7 @@
 - Sort Algorithms
     - [Bubble Sort](#bubble-sort)
     - [Selection Sort](#selection-sort)
-    - Insertion Sort
+    - [Insertion Sort](#insertion-sort)
     - Merge Sort
 
 ---
@@ -94,3 +94,22 @@
 | Worse-case | Best-case |
 |------------|-----------|
 | O(n²): To look over all the elements of the array to find the smallest unsorted element, and repeat that `n` times. | Ω(n²): Same as Worse-case scenario :( |
+
+### **Insertion Sort**
+
+**The idea of the algorithm is to build your sorted array in place,  shifting elements out of the way if necessary to make room as you go.**
+
+
+**In pseudocode**:
+
+    - Call the first element of the array "sorted"
+    - Repeat until all elements are sorted:
+        - look at the next unsorted element. Insert into the sorted portion by shifting the requisite number of elements.
+
+![insertion sort gif](./assets/insertion-sort.gif)
+
+#### Complexity
+
+| Worse-case | Best-case |
+|------------|-----------|
+| O(n²): The array is in reverse order so every single element must shift possition. | Ω(n): The array is already sorted. |
