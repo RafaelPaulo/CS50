@@ -12,7 +12,7 @@
     - [Bubble Sort](#bubble-sort)
     - [Selection Sort](#selection-sort)
     - [Insertion Sort](#insertion-sort)
-    - Merge Sort
+    - [Merge Sort](#merge-sort)
 
 ---
 
@@ -113,3 +113,23 @@
 | Worse-case | Best-case |
 |------------|-----------|
 | O(n²): The array is in reverse order so every single element must shift possition. | Ω(n): The array is already sorted. |
+
+### **Merge Sort**
+
+**Different from the other algorithms above (Bubble Sort, Insertion Sort, and Selection Sort), Merge Sort can be implemented in the "real world" since it has the best performance over the others mentioned `O(n log n)`.**
+
+**The idea of the algorithm is to sort smaller arrays and then combine those arrays together (merge them) in sorted order.**
+
+**In pseudocode**:
+
+    - Sort the left half of the array
+    - Sort the right half of the array
+    - Merge the two halves together
+
+![merge sort gif](./assets/merge-sort.gif)
+
+#### Complexity
+
+| Worse-case | Best-case  |
+|------------|----------- |
+| O(n log n) | Ω(n log n) |
