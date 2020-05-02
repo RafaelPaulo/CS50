@@ -62,11 +62,12 @@
 **The idea of the algorithm is to move higher valued elements generally towards the right and lower values elements generally towards the left.**
 
 **In pseudocode**:
-    - Set swap counter to a non-zero value
-    - Repeat until the swap counter is 0:
-        - reset swap counter to 0
-        - look at each adjacent pair
-            - if two adjacent elements are not in order, swap them and add one to the swap counter
+
+- Set swap counter to a non-zero value
+- Repeat until the swap counter is 0:
+    - reset swap counter to 0
+    - look at each adjacent pair
+        - if two adjacent elements are not in order, swap them and add one to the swap counter
 
 ![bubble sort gif](./assets/bubble-sort.gif)
 
@@ -83,9 +84,10 @@
 **Effectively what this algorithm does is build a sorted list one element at a time.**
 
 **In pseudocode**:
-    - Repeat until no unsorted elements remain:
-        - Search the unsorted part of the data to find the smallest value
-        - Swap the smallest found value with the first element of the unsorted part.
+
+- Repeat until no unsorted elements remain:
+    - Search the unsorted part of the data to find the smallest value
+    - Swap the smallest found value with the first element of the unsorted part.
 
 ![selection sort gif](./assets/selection-sort.gif)
 
@@ -102,9 +104,9 @@
 
 **In pseudocode**:
 
-    - Call the first element of the array "sorted"
-    - Repeat until all elements are sorted:
-        - look at the next unsorted element. Insert into the sorted portion by shifting the requisite number of elements.
+- Call the first element of the array "sorted"
+- Repeat until all elements are sorted:
+    - look at the next unsorted element. Insert into the sorted portion by shifting the requisite number of elements.
 
 ![insertion sort gif](./assets/insertion-sort.gif)
 
@@ -122,9 +124,9 @@
 
 **In pseudocode**:
 
-    - Sort the left half of the array
-    - Sort the right half of the array
-    - Merge the two halves together
+- Sort the left half of the array
+- Sort the right half of the array
+- Merge the two halves together
 
 ![merge sort gif](./assets/merge-sort.gif)
 
