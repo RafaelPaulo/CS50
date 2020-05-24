@@ -3,7 +3,6 @@
 #include <stdio.h>
 
 // prototypes
-int calculateAverage(RGBTRIPLE pixel); // Calculate the average number given a pixel; 
 void swapPixels(RGBTRIPLE *px1, RGBTRIPLE *px2); // Swap pixels
 
 // Convert image to grayscale
@@ -15,7 +14,8 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
         for (int j = 0; j < width; j++)
         {
             // calculate the average pixel value
-            int average = calculateAverage(image[i][j]);
+            float sum = image[i][j].rgbtRed + image[i][j].rgbtGreen + image[i][j].rgbtBlue;
+            int average = (int)round(sum / 3.0);
 
             // set each color value to the average value
             image[i][j].rgbtRed = average;
@@ -107,15 +107,6 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
     return;
 }
 
-
-
-
-// ----
-
-int calculateAverage(RGBTRIPLE pixel)
-{
-    return round((pixel.rgbtRed + pixel.rgbtGreen + pixel.rgbtRed) / 3);
-}
 
 void swapPixels(RGBTRIPLE *px1, RGBTRIPLE *px2)
 {
