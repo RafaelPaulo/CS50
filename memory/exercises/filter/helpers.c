@@ -47,6 +47,57 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
+    RGBTRIPLE imageCopy[height][width];
+
+    // For each pixel in the image image[i][j]
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            // Get last width index
+            int wEdgeIndex = width - 1;
+            // Get last height index
+            int hEdgeIndex = height - 1;
+            // counter to count the number of pixel around this current image[i][j] pixel
+            int counter = 0;
+
+            // find the pixels around the image[i][j] pixel
+            int lStart = (i - 1 < 0 ? 0 : i - 1),
+                lEnd   = (i + 1 > hEdgeIndex ? hEdgeIndex : i + 1),
+                cStart = (j - 1 < 0 ? 0 : j - 1),
+                cEnd   = (j + 1 > wEdgeIndex ? wEdgeIndex : j + 1);
+
+            float r = 0.00;
+            float g = 0.00;
+            float b = 0.00;
+
+            // iterate over the pixels around and calculate the average of each color
+            for (int ii = lStart; ii <= lEnd; ii++)
+            {
+                for (int jj = cStart; jj <= cEnd; jj++)
+                {
+                    r += image[ii][jj].rgbtRed;
+                    g += image[ii][jj].rgbtGreen;
+                    b += image[ii][jj].rgbtBlue;
+                    counter++;
+                }
+            }
+
+            imageCopy[i][j].rgbtRed = round(r / (float)counter);
+            imageCopy[i][j].rgbtGreen = round(g / (float)counter);
+            imageCopy[i][j].rgbtBlue = round(b / (float)counter);
+        }
+    }
+
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            image[i][j].rgbtRed = imageCopy[i][j].rgbtRed;
+            image[i][j].rgbtGreen = imageCopy[i][j].rgbtGreen;
+            image[i][j].rgbtBlue = imageCopy[i][j].rgbtBlue;
+        }
+    }
     return;
 }
 
