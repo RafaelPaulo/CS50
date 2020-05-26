@@ -4,6 +4,11 @@
 
 // prototypes
 void swapPixels(RGBTRIPLE *px1, RGBTRIPLE *px2); // Swap pixels
+int cap(int value);
+int isValidIndexes(int i, int j, int height, int width);
+
+int GX[3][3] = {{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}}; // Vertical
+int GY[3][3] = {{-1, -2, -1}, {0, 0, 0}, {1, 2, 1}}; // Horizontal
 
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
@@ -63,9 +68,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 
             // find the pixels around the image[i][j] pixel
             int lStart = (i - 1 < 0 ? 0 : i - 1),
-                lEnd   = (i + 1 > hEdgeIndex ? hEdgeIndex : i + 1),
+                lEnd = (i + 1 > hEdgeIndex ? hEdgeIndex : i + 1),
                 cStart = (j - 1 < 0 ? 0 : j - 1),
-                cEnd   = (j + 1 > wEdgeIndex ? wEdgeIndex : j + 1);
+                cEnd = (j + 1 > wEdgeIndex ? wEdgeIndex : j + 1);
 
             float r = 0.00;
             float g = 0.00;
@@ -93,9 +98,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int j = 0; j < width; j++)
         {
-            image[i][j].rgbtRed = imageCopy[i][j].rgbtRed;
-            image[i][j].rgbtGreen = imageCopy[i][j].rgbtGreen;
-            image[i][j].rgbtBlue = imageCopy[i][j].rgbtBlue;
+            image[i][j] = imageCopy[i][j];
         }
     }
     return;
@@ -104,9 +107,70 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 // Detect edges
 void edges(int height, int width, RGBTRIPLE image[height][width])
 {
+    RGBTRIPLE imageCopy[height][width];
+
+    // For each pixel in the image image[i][j]
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            float rGX = 0.0;
+            float gGX = 0.0;
+            float bGX = 0.0;
+            float rGY = 0.0;
+            float gGY = 0.0;
+            float bGY = 0.0;
+
+            // iterate over the pixels around and calculate the average of each color
+            for (int x = -1; x <= 1; x++)
+            {
+                for (int y = -1; y <= 1; y++)
+                {
+                    if (isValidIndexes(i + x, j + y, height, width))
+                    {
+                        float gxValue = GX[x + 1][y + 1];
+                        float gyValue = GY[x + 1][y + 1];
+
+                        int imgIndexI = i + x;
+                        int imgIndexJ = j + y;
+
+                        rGX += (gxValue * (float)image[imgIndexI][imgIndexJ].rgbtRed);
+                        gGX += (gxValue * (float)image[imgIndexI][imgIndexJ].rgbtGreen);
+                        bGX += (gxValue * (float)image[imgIndexI][imgIndexJ].rgbtBlue);
+
+                        rGY += (gyValue * (float)image[imgIndexI][imgIndexJ].rgbtRed);
+                        gGY += (gyValue * (float)image[imgIndexI][imgIndexJ].rgbtGreen);
+                        bGY += (gyValue * (float)image[imgIndexI][imgIndexJ].rgbtBlue);
+                    }
+                }
+            }
+
+            imageCopy[i][j].rgbtRed   = cap(round(sqrt((rGX * rGX) + (rGY * rGY))));
+            imageCopy[i][j].rgbtGreen = cap(round(sqrt((gGX * gGX) + (gGY * gGY))));
+            imageCopy[i][j].rgbtBlue  = cap(round(sqrt((bGX * bGX) + (bGY * bGY))));
+        }
+    }
+
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            image[i][j] = imageCopy[i][j];
+        }
+    }
+
     return;
 }
 
+int cap(int value)
+{
+    return value > 255 ? 255 : value;
+}
+
+int isValidIndexes(int i, int j, int height, int width)
+{
+    return i >= 0 && i < height && j >= 0 && j < width;
+}
 
 void swapPixels(RGBTRIPLE *px1, RGBTRIPLE *px2)
 {
